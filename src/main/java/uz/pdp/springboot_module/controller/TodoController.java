@@ -19,7 +19,9 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
 
-@Controller
+/*@Controller
+@ResponseBody*/
+@RestController
 public class TodoController {
 
     private static AtomicInteger idCounter = new AtomicInteger(0);
@@ -32,14 +34,12 @@ public class TodoController {
     }
 
     @GetMapping(value = "/todos"/*, consumes = "application/json", produces = {"application/json", "application/xml"}*/)
-    @ResponseBody
     public ResponseEntity<List<Todo>> getTodos() {
         return ResponseEntity.ok(todos);
     }
 
     // @RequestBody = @ModelAttribute
 //    @PostMapping("/todos")
-//    @ResponseBody
 //    @ResponseStatus(HttpStatus.CREATED)
 //    public void addTodo(@RequestBody TodoCreator creator){
 //        Todo todo = new Todo(idCounter.incrementAndGet(), creator.title(), creator.priority());
@@ -47,7 +47,6 @@ public class TodoController {
 //    }
 
     @PostMapping("/todos")
-    @ResponseBody
 //    @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<Todo> addTodo(@RequestBody @Valid TodoCreator creator) {
         Todo todo = new Todo(idCounter.incrementAndGet(), creator.title(), creator.priority());
@@ -58,7 +57,6 @@ public class TodoController {
 
 
     @GetMapping(value = "/todos/{id}")
-    @ResponseBody
     public ResponseEntity<Todo> getTodoById(@PathVariable Integer id) {
         Optional<Todo> optionalTodo = todos.stream()
                 .filter(
@@ -72,7 +70,6 @@ public class TodoController {
     }
 
 //    @ExceptionHandler(DataNotFoundException.class)
-//    @ResponseBody
 //    public ResponseEntity<Object> handleDataNotFoundException(DataNotFoundException ex, HttpServletRequest request) {
 //        return ResponseEntity
 //                .status(HttpStatus.NOT_FOUND)
