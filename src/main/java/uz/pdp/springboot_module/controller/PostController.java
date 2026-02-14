@@ -2,6 +2,7 @@ package uz.pdp.springboot_module.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import uz.pdp.springboot_module.entity.Post;
 import uz.pdp.springboot_module.service.PostService;
@@ -29,5 +30,23 @@ public class PostController {
             @RequestParam(name = "order", required = false) String order
     ) {
         return postService.findPostsByUserId(userId, order);
+    }
+
+    @PostMapping("/create")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Post create(@RequestBody Post post) {
+        return postService.create(post);
+    }
+
+    @PutMapping("/update")
+    @ResponseStatus(HttpStatus.OK)
+    public Post update(@RequestBody Post post) {
+        return postService.update(post);
+    }
+
+    @DeleteMapping("/deleteById/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteById(@PathVariable Integer id) {
+        postService.deleteById(id);
     }
 }
