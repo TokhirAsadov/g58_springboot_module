@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import uz.pdp.springboot_module.entity.Post;
 
+import java.util.Collection;
 import java.util.List;
 
 @Repository
@@ -27,4 +28,7 @@ public interface PostRepository extends JpaRepository<Post, Integer> {
     @Query("select p from Post p where p.userId = ?1") // JPQL
     List<Post> getPostsByUserId(Integer userId, Sort sort);
 
+    List<Post> findAllByUserId(Integer userId, Sort sort);
+
+    List<Post> findAllByUserIdIn(Collection<Integer> userId, Sort sort);
 }

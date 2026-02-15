@@ -32,6 +32,14 @@ public class PostController {
         return postService.findPostsByUserId(userId, order);
     }
 
+    @GetMapping("/findPostsByUserIds")
+    public List<Post> findPostsByUserId(
+            @RequestParam List<Integer> usersIds,
+            @RequestParam(name = "order", required = false) String order
+    ) {
+        return postService.findPostsByUserIds(usersIds, order);
+    }
+
     @PostMapping("/create")
     @ResponseStatus(HttpStatus.CREATED)
     public Post create(@RequestBody Post post) {
