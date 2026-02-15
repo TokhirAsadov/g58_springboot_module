@@ -14,4 +14,6 @@ public interface BookRepository extends JpaRepository<Book, Long> {
     List<Book> findAllByNameIgnoreCaseStartsWithAndPriceGreaterThanEqual(String name, Double price);
 
     List<Book> findAllByPriceBetween(Double fromPrice, Double toPrice);
+
+    List<Book> findAllByYearBetween(Integer fromYear, Integer toYear);
 }

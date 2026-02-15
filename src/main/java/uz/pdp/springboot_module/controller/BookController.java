@@ -60,4 +60,12 @@ public class BookController {
     ) {
         return bookService.findByPriceBetween(fromPrice, toPrice);
     }
+
+    @GetMapping("/findByYearBetween")
+    public List<BookResponse> findByYearBetween(
+            @RequestParam Integer fromYear,
+            @RequestParam Integer toYear
+    ) {
+        return bookService.findByYearBetween(fromYear, toYear);
+    }
 }

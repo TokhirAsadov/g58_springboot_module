@@ -57,4 +57,11 @@ public class PostController {
     public void deleteById(@PathVariable Integer id) {
         postService.deleteById(id);
     }
+
+    @GetMapping("/findByIdOrUserId")
+    public List<Post> findByIdOrUserId(
+            @RequestParam Integer idOrUserId
+    ){
+        return postService.findByIdOrUserId(idOrUserId);
+    }
 }

@@ -101,4 +101,18 @@ public class BookServiceImpl implements BookService {
                         book.getPages()
                 )).toList();
     }
+
+    @Override
+    public List<BookResponse> findByYearBetween(Integer fromYear, Integer toYear) {
+        return bookRepository.findAllByYearBetween(fromYear, toYear)
+                .stream()
+                .map(book -> new BookResponse(
+                        book.getId(),
+                        book.getName(),
+                        book.getAuthor(),
+                        book.getYear(),
+                        book.getPrice(),
+                        book.getPages()
+                )).toList();
+    }
 }

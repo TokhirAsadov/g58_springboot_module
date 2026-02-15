@@ -17,4 +17,6 @@ public interface PostService {
     Post update(Post post);
 
     List<Post> findPostsByUserIds(List<Integer> usersIds, String order);
+
+    List<Post> findByIdOrUserId(Integer idOrUserId);
 }

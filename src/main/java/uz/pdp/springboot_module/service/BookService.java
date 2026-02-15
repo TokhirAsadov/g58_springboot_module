@@ -18,4 +18,6 @@ public interface BookService {
     List<BookResponse> findByParams(String name, Double price);
 
     List<BookResponse> findByPriceBetween(Double fromPrice, Double toPrice);
+
+    List<BookResponse> findByYearBetween(Integer fromYear, Integer toYear);
 }

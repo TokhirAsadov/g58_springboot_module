@@ -52,4 +52,9 @@ public class PostServiceImpl implements PostService {
         Sort sort = Sort.by(Sort.Direction.DESC, order == null ? "id" : order);
         return postRepository.findAllByUserIdIn(usersIds, sort);
     }
+
+    @Override
+    public List<Post> findByIdOrUserId(Integer idOrUserId) {
+        return postRepository.findAllByIdOrUserId(idOrUserId, idOrUserId);
+    }
 }
