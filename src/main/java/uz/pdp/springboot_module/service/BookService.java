@@ -3,6 +3,8 @@ package uz.pdp.springboot_module.service;
 import uz.pdp.springboot_module.entity.Book;
 import uz.pdp.springboot_module.payload.BookCreator;
 import uz.pdp.springboot_module.payload.BookResponse;
+import uz.pdp.springboot_module.repository.BookDTO;
+import uz.pdp.springboot_module.repository.GetBookDTO;
 
 import java.util.List;
 
@@ -20,4 +22,8 @@ public interface BookService {
     List<BookResponse> findByPriceBetween(Double fromPrice, Double toPrice);
 
     List<BookResponse> findByYearBetween(Integer fromYear, Integer toYear);
+
+    List<GetBookDTO> getBooksByName(String name);
+
+    List<BookDTO> getBooksByName2(String name);
 }

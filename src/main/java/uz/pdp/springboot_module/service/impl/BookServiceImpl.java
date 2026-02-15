@@ -5,7 +5,9 @@ import org.springframework.stereotype.Service;
 import uz.pdp.springboot_module.entity.Book;
 import uz.pdp.springboot_module.payload.BookCreator;
 import uz.pdp.springboot_module.payload.BookResponse;
+import uz.pdp.springboot_module.repository.BookDTO;
 import uz.pdp.springboot_module.repository.BookRepository;
+import uz.pdp.springboot_module.repository.GetBookDTO;
 import uz.pdp.springboot_module.service.BookService;
 
 import java.util.List;
@@ -114,5 +116,15 @@ public class BookServiceImpl implements BookService {
                         book.getPrice(),
                         book.getPages()
                 )).toList();
+    }
+
+    @Override
+    public List<GetBookDTO> getBooksByName(String name) {
+        return bookRepository.getBooksByName(name);
+    }
+
+    @Override
+    public List<BookDTO> getBooksByName2(String name) {
+        return bookRepository.getBooksByName2(name);
     }
 }

@@ -7,6 +7,8 @@ import uz.pdp.springboot_module.entity.Book;
 import uz.pdp.springboot_module.entity.Post;
 import uz.pdp.springboot_module.payload.BookCreator;
 import uz.pdp.springboot_module.payload.BookResponse;
+import uz.pdp.springboot_module.repository.BookDTO;
+import uz.pdp.springboot_module.repository.GetBookDTO;
 import uz.pdp.springboot_module.service.BookService;
 import uz.pdp.springboot_module.utils.Constants;
 
@@ -67,5 +69,18 @@ public class BookController {
             @RequestParam Integer toYear
     ) {
         return bookService.findByYearBetween(fromYear, toYear);
+    }
+    @GetMapping("/getBooksByName")
+    public List<GetBookDTO> getBooksByName(
+            @RequestParam String name
+    ) {
+        return bookService.getBooksByName(name);
+    }
+
+    @GetMapping("/getBooksByName2")
+    public List<BookDTO> getBooksByName2(
+            @RequestParam String name
+    ) {
+        return bookService.getBooksByName2(name);
     }
 }
