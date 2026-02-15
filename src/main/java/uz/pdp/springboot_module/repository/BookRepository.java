@@ -3,5 +3,15 @@ package uz.pdp.springboot_module.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import uz.pdp.springboot_module.entity.Book;
 
+import java.util.List;
+import java.util.Optional;
+
 public interface BookRepository extends JpaRepository<Book, Long> {
+    Optional<Book> findByName(String name);
+
+    Optional<Book> findByNameIgnoreCase(String name);
+
+    List<Book> findAllByNameIgnoreCaseStartsWithAndPriceGreaterThanEqual(String name, Double price);
+
+    List<Book> findAllByPriceBetween(Double fromPrice, Double toPrice);
 }

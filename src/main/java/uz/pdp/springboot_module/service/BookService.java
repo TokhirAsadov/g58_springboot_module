@@ -12,4 +12,10 @@ public interface BookService {
     List<Book> findAll();
 
     Book findById(Long id);
+
+    BookResponse findByName(String name);
+
+    List<BookResponse> findByParams(String name, Double price);
+
+    List<BookResponse> findByPriceBetween(Double fromPrice, Double toPrice);
 }

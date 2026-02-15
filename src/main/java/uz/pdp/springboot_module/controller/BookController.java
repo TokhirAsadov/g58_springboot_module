@@ -39,4 +39,25 @@ public class BookController {
     public Book findById(@PathVariable Long id) {
         return bookService.findById(id);
     }
+
+    @GetMapping("/findByName/{name}")
+    public BookResponse findByName(@PathVariable String name) {
+        return bookService.findByName(name);
+    }
+
+    @GetMapping("/findByParams")
+    public List<BookResponse> findByParams(
+            @RequestParam String name,
+            @RequestParam Double price
+    ) {
+        return bookService.findByParams(name, price);
+    }
+
+    @GetMapping("/findByPriceBetween")
+    public List<BookResponse> findByPriceBetween(
+            @RequestParam Double fromPrice,
+            @RequestParam Double toPrice
+    ) {
+        return bookService.findByPriceBetween(fromPrice, toPrice);
+    }
 }
