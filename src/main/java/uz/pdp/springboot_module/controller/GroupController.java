@@ -3,14 +3,14 @@ package uz.pdp.springboot_module.controller;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import uz.pdp.springboot_module.payload.BaseResponse;
 import uz.pdp.springboot_module.payload.GroupCreator;
 import uz.pdp.springboot_module.payload.GroupResponse;
 import uz.pdp.springboot_module.service.GroupService;
 import uz.pdp.springboot_module.utils.Constants;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -20,8 +20,21 @@ public class GroupController {
     private final GroupService groupService;
 
     @PostMapping("/create")
-    public ResponseEntity<GroupResponse> create(@RequestBody @Valid GroupCreator creator) {
-        GroupResponse response = groupService.create(creator);
-        return ResponseEntity.status(201).body(response);
+    public ResponseEntity<BaseResponse<GroupResponse>> create(@RequestBody @Valid GroupCreator creator) {
+        BaseResponse<GroupResponse> response = groupService.create(creator);
+        return ResponseEntity.status(response.getSuccess() ? 201 : 400).body(response);
+    }
+
+    @GetMapping("/findById/{id}")
+    public ResponseEntity<BaseResponse<GroupResponse>> findById(@PathVariable Long id) {
+        BaseResponse<GroupResponse> response = groupService.findById(id);
+        return ResponseEntity.status(response.getSuccess() ? 200 : 404).body(response);
+    }
+
+
+    @GetMapping("/findAll")
+    public ResponseEntity<BaseResponse<List<GroupResponse>>> findAll() {
+        BaseResponse<List<GroupResponse>> response = groupService.findAll();
+        return ResponseEntity.status(response.getSuccess() ? 200 : 404).body(response);
     }
 }

@@ -4,7 +4,7 @@ import lombok.Builder;
 
 @Builder
 public record GroupResponse(
-        Integer id,
+        Long id,
         String name,
         Integer level
 ) {
