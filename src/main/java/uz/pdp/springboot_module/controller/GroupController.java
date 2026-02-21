@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import uz.pdp.springboot_module.payload.BaseResponse;
+import uz.pdp.springboot_module.payload.GetGroupFullInfo;
 import uz.pdp.springboot_module.payload.GroupCreator;
 import uz.pdp.springboot_module.payload.GroupResponse;
 import uz.pdp.springboot_module.service.GroupService;
@@ -31,10 +32,15 @@ public class GroupController {
         return ResponseEntity.status(response.getSuccess() ? 200 : 404).body(response);
     }
 
-
     @GetMapping("/findAll")
     public ResponseEntity<BaseResponse<List<GroupResponse>>> findAll() {
         BaseResponse<List<GroupResponse>> response = groupService.findAll();
+        return ResponseEntity.status(response.getSuccess() ? 200 : 404).body(response);
+    }
+
+    @GetMapping("/getGroupFullInfo/{id}")
+    public ResponseEntity<BaseResponse<GetGroupFullInfo>> getGroupFullInfo(@PathVariable Long id) {
+        BaseResponse<GetGroupFullInfo> response = groupService.getGroupFullInfo(id);
         return ResponseEntity.status(response.getSuccess() ? 200 : 404).body(response);
     }
 }

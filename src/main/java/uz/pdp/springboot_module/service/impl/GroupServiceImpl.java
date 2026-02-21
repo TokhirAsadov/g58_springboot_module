@@ -6,6 +6,7 @@ import uz.pdp.springboot_module.entity.Group;
 import uz.pdp.springboot_module.exceptions.DataNotFoundException;
 import uz.pdp.springboot_module.exceptions.GroupNameAlreadyExistsException;
 import uz.pdp.springboot_module.payload.BaseResponse;
+import uz.pdp.springboot_module.payload.GetGroupFullInfo;
 import uz.pdp.springboot_module.payload.GroupCreator;
 import uz.pdp.springboot_module.payload.GroupResponse;
 import uz.pdp.springboot_module.repository.GroupRepository;
@@ -65,5 +66,17 @@ public class GroupServiceImpl implements GroupService {
                 group.getLevel()
         )).toList();
         return new BaseResponse<>(groupResponses);
+    }
+
+    @Override
+    public BaseResponse<GetGroupFullInfo> getGroupFullInfo(Long id) {
+        boolean bool = groupRepository.existsById(id);
+        if (!bool){
+            throw new DataNotFoundException("Group with id '" + id + "' not found");
+        }
+        else {
+            GetGroupFullInfo groupFullInfo = groupRepository.getGroupFullInfo(id);
+            return new BaseResponse<>(groupFullInfo);
+        }
     }
 }

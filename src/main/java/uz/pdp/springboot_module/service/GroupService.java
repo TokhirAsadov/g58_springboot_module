@@ -1,6 +1,7 @@
 package uz.pdp.springboot_module.service;
 
 import uz.pdp.springboot_module.payload.BaseResponse;
+import uz.pdp.springboot_module.payload.GetGroupFullInfo;
 import uz.pdp.springboot_module.payload.GroupCreator;
 import uz.pdp.springboot_module.payload.GroupResponse;
 
@@ -12,4 +13,6 @@ public interface GroupService {
     BaseResponse<GroupResponse> findById(Long id);
 
     BaseResponse<List<GroupResponse>> findAll();
+
+    BaseResponse<GetGroupFullInfo> getGroupFullInfo(Long id);
 }
