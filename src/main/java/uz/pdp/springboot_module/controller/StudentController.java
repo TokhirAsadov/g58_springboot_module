@@ -4,7 +4,6 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.function.EntityResponse;
 import uz.pdp.springboot_module.payload.BaseResponse;
 import uz.pdp.springboot_module.payload.StudentCreator;
 import uz.pdp.springboot_module.payload.StudentResponse;
