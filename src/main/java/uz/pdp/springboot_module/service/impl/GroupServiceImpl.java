@@ -79,4 +79,23 @@ public class GroupServiceImpl implements GroupService {
             return new BaseResponse<>(groupFullInfo);
         }
     }
+
+    @Override
+    public BaseResponse<GroupResponse> update(Long id, GroupCreator creator) {
+        Optional<Group> optionalGroup = groupRepository.findById(id);
+        if (optionalGroup.isEmpty()){
+            throw new DataNotFoundException("Group with id '" + id + "' not found");
+        }
+        else {
+            Group group = optionalGroup.get();
+            group.setName(creator.name());
+            group.setLevel(creator.level());
+            Group save = groupRepository.save(group);
+            return new BaseResponse<>(new GroupResponse(
+                    save.getId(),
+                    save.getName(),
+                    save.getLevel()
+            ));
+        }
+    }
 }

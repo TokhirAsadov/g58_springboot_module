@@ -26,6 +26,12 @@ public class GroupController {
         return ResponseEntity.status(response.getSuccess() ? 201 : 400).body(response);
     }
 
+    @PutMapping("/update/{id}")
+    public ResponseEntity<BaseResponse<GroupResponse>> update(@PathVariable Long id, @RequestBody @Valid GroupCreator creator) {
+        BaseResponse<GroupResponse> response = groupService.update(id, creator);
+        return ResponseEntity.status(response.getSuccess() ? 200 : 400).body(response);
+    }
+
     @GetMapping("/findById/{id}")
     public ResponseEntity<BaseResponse<GroupResponse>> findById(@PathVariable Long id) {
         BaseResponse<GroupResponse> response = groupService.findById(id);

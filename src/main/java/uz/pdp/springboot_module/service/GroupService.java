@@ -15,4 +15,6 @@ public interface GroupService {
     BaseResponse<List<GroupResponse>> findAll();
 
     BaseResponse<GetGroupFullInfo> getGroupFullInfo(Long id);
+
+    BaseResponse<GroupResponse> update(Long id, GroupCreator creator);
 }
