@@ -3,8 +3,8 @@ package uz.pdp.springboot_module.service;
 import uz.pdp.springboot_module.entity.Book;
 import uz.pdp.springboot_module.payload.BookCreator;
 import uz.pdp.springboot_module.payload.BookResponse;
-import uz.pdp.springboot_module.repository.BookDTO;
-import uz.pdp.springboot_module.repository.GetBookDTO;
+import uz.pdp.springboot_module.payload.BookDTO;
+import uz.pdp.springboot_module.payload.GetBookDTO;
 
 import java.util.List;
 

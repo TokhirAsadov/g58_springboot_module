@@ -4,6 +4,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import uz.pdp.springboot_module.entity.Book;
+import uz.pdp.springboot_module.payload.BookDTO;
+import uz.pdp.springboot_module.payload.GetBookDTO;
 
 import java.util.List;
 import java.util.Optional;

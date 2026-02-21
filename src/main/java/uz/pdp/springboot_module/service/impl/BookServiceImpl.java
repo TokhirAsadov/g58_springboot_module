@@ -5,13 +5,12 @@ import org.springframework.stereotype.Service;
 import uz.pdp.springboot_module.entity.Book;
 import uz.pdp.springboot_module.payload.BookCreator;
 import uz.pdp.springboot_module.payload.BookResponse;
-import uz.pdp.springboot_module.repository.BookDTO;
+import uz.pdp.springboot_module.payload.BookDTO;
 import uz.pdp.springboot_module.repository.BookRepository;
-import uz.pdp.springboot_module.repository.GetBookDTO;
+import uz.pdp.springboot_module.payload.GetBookDTO;
 import uz.pdp.springboot_module.service.BookService;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor

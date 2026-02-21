@@ -2,6 +2,7 @@ package uz.pdp.springboot_module.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import uz.pdp.springboot_module.payload.BookDTO;
 
 @Getter
 @Setter
@@ -14,7 +15,7 @@ import lombok.*;
 @SqlResultSetMapping(
         name = "BookDTOMapping",
         classes = @ConstructorResult(
-                targetClass = uz.pdp.springboot_module.repository.BookDTO.class,
+                targetClass = BookDTO.class,
                 columns = {
                         @ColumnResult(name = "id", type = Long.class),
                         @ColumnResult(name = "name", type = String.class),

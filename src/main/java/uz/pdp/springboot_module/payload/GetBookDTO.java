@@ -1,4 +1,4 @@
-package uz.pdp.springboot_module.repository;
+package uz.pdp.springboot_module.payload;
 
 public interface GetBookDTO {
     Long getId();
