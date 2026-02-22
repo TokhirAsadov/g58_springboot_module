@@ -1,6 +1,8 @@
 package uz.pdp.springboot_module.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import uz.pdp.springboot_module.entity.User;
 import uz.pdp.springboot_module.payload.UserCreator;
@@ -8,6 +10,7 @@ import uz.pdp.springboot_module.payload.UserResponse;
 import uz.pdp.springboot_module.repository.UserRepository;
 import uz.pdp.springboot_module.service.UserService;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -58,5 +61,20 @@ public class UserServiceImpl implements UserService {
         user.setDeleted(true);
         user.setUsername(user.getUsername() + "_" + UUID.randomUUID());
         userRepository.saveAndFlush(user);
+    }
+
+    @Override
+    public List<UserResponse> findAll() {
+        List<User> users = userRepository.findAll();
+        List<UserResponse> responses = users.stream()
+                .map(user -> new UserResponse(user.getId(), user.getFirstName(), user.getLastName(), user.getUsername()))
+                .toList();
+        return responses;
+    }
+
+    @Override
+    public Page<UserResponse> findAll(Pageable pageable) {
+        Page<UserResponse> userResponses = userRepository.findAll(pageable).map(user -> new UserResponse(user.getId(), user.getFirstName(), user.getLastName(), user.getUsername()));
+        return userResponses;
     }
 }

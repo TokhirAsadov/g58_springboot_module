@@ -5,6 +5,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.domain.AuditorAware;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
+import org.springframework.data.web.HateoasPageableHandlerMethodArgumentResolver;
+import org.springframework.data.web.PagedResourcesAssembler;
+import uz.pdp.springboot_module.payload.UserResponse;
 import uz.pdp.springboot_module.security.UserSession;
 
 import java.util.Optional;
@@ -28,4 +31,8 @@ public class SpringbootModuleApplication {
         return () -> Optional.ofNullable(userSession.getUserId());
     }
 
+    @Bean(name = "userResponsePagedResourcesAssembler")
+    public PagedResourcesAssembler<UserResponse> userResponsePagedResourcesAssembler(){
+        return new PagedResourcesAssembler<>(new HateoasPageableHandlerMethodArgumentResolver(), null);
+    }
 }
