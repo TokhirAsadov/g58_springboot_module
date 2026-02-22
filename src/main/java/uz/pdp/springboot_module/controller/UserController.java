@@ -4,9 +4,8 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import uz.pdp.springboot_module.payload.BaseResponse;
-import uz.pdp.springboot_module.payload.user.UserCreator;
-import uz.pdp.springboot_module.payload.user.UserResponse;
+import uz.pdp.springboot_module.payload.UserCreator;
+import uz.pdp.springboot_module.payload.UserResponse;
 import uz.pdp.springboot_module.service.UserService;
 import uz.pdp.springboot_module.utils.Constants;
 
@@ -18,15 +17,15 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("/create")
-    public ResponseEntity<BaseResponse<UserResponse>> create(@RequestBody @Valid UserCreator creator) {
-        BaseResponse<UserResponse> response = userService.create(creator);
-        return ResponseEntity.status(response.getSuccess() ? 201 : 400).body(response);
+    public ResponseEntity<UserResponse> create(@RequestBody @Valid UserCreator creator) {
+        UserResponse response = userService.create(creator);
+        return ResponseEntity.status(201).body(response);
     }
 
     @GetMapping("/findById/{id}")
-    public ResponseEntity<BaseResponse<UserResponse>> findById(@PathVariable Long id) {
-        BaseResponse<UserResponse> response = userService.findById(id);
-        return ResponseEntity.status(response.getSuccess() ? 200 : 400).body(response);
+    public ResponseEntity<UserResponse> findById(@PathVariable Long id) {
+        UserResponse response = userService.findById(id);
+        return ResponseEntity.ok(response);
     }
 
 
