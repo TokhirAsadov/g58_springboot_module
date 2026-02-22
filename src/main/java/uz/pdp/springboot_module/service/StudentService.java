@@ -1,8 +1,8 @@
 package uz.pdp.springboot_module.service;
 
 import uz.pdp.springboot_module.payload.BaseResponse;
-import uz.pdp.springboot_module.payload.StudentCreator;
-import uz.pdp.springboot_module.payload.StudentResponse;
+import uz.pdp.springboot_module.payload.student.StudentCreator;
+import uz.pdp.springboot_module.payload.student.StudentResponse;
 
 import java.util.List;
 

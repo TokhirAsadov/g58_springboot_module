@@ -1,9 +1,9 @@
 package uz.pdp.springboot_module.service;
 
 import uz.pdp.springboot_module.payload.BaseResponse;
-import uz.pdp.springboot_module.payload.GetGroupFullInfo;
-import uz.pdp.springboot_module.payload.GroupCreator;
-import uz.pdp.springboot_module.payload.GroupResponse;
+import uz.pdp.springboot_module.payload.group.GetGroupFullInfo;
+import uz.pdp.springboot_module.payload.group.GroupCreator;
+import uz.pdp.springboot_module.payload.group.GroupResponse;
 
 import java.util.List;
 

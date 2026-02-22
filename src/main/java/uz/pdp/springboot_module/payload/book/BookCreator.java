@@ -1,4 +1,4 @@
-package uz.pdp.springboot_module.payload;
+package uz.pdp.springboot_module.payload.book;
 
 public record BookCreator(
         String name,

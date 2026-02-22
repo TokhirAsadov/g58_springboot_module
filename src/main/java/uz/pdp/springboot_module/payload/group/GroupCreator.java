@@ -1,4 +1,4 @@
-package uz.pdp.springboot_module.payload;
+package uz.pdp.springboot_module.payload.group;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.validation.constraints.NotBlank;

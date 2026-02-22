@@ -4,10 +4,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import uz.pdp.springboot_module.entity.Book;
-import uz.pdp.springboot_module.payload.BookCreator;
-import uz.pdp.springboot_module.payload.BookResponse;
-import uz.pdp.springboot_module.payload.BookDTO;
-import uz.pdp.springboot_module.payload.GetBookDTO;
+import uz.pdp.springboot_module.payload.book.BookCreator;
+import uz.pdp.springboot_module.payload.book.BookResponse;
+import uz.pdp.springboot_module.payload.book.BookDTO;
+import uz.pdp.springboot_module.payload.book.GetBookDTO;
 import uz.pdp.springboot_module.service.BookService;
 import uz.pdp.springboot_module.utils.Constants;
 

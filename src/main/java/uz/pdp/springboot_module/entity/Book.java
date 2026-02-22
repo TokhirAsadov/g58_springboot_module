@@ -2,7 +2,7 @@ package uz.pdp.springboot_module.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import uz.pdp.springboot_module.payload.BookDTO;
+import uz.pdp.springboot_module.payload.book.BookDTO;
 
 @Getter
 @Setter

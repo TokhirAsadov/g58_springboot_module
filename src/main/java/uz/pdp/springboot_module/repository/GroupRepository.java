@@ -4,7 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import uz.pdp.springboot_module.entity.Group;
-import uz.pdp.springboot_module.payload.GetGroupFullInfo;
+import uz.pdp.springboot_module.payload.group.GetGroupFullInfo;
 
 public interface GroupRepository extends JpaRepository<Group, Long> {
     Boolean existsByName(String name);

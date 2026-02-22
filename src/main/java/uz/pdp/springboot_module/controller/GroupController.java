@@ -5,9 +5,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import uz.pdp.springboot_module.payload.BaseResponse;
-import uz.pdp.springboot_module.payload.GetGroupFullInfo;
-import uz.pdp.springboot_module.payload.GroupCreator;
-import uz.pdp.springboot_module.payload.GroupResponse;
+import uz.pdp.springboot_module.payload.group.GetGroupFullInfo;
+import uz.pdp.springboot_module.payload.group.GroupCreator;
+import uz.pdp.springboot_module.payload.group.GroupResponse;
 import uz.pdp.springboot_module.service.GroupService;
 import uz.pdp.springboot_module.utils.Constants;
 

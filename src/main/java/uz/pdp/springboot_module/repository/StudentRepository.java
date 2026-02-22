@@ -4,7 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import uz.pdp.springboot_module.entity.Student;
-import uz.pdp.springboot_module.payload.GetStudentResponse;
+import uz.pdp.springboot_module.payload.student.GetStudentResponse;
 
 import java.util.List;
 

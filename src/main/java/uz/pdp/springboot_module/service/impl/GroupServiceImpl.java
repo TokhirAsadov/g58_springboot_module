@@ -6,9 +6,9 @@ import uz.pdp.springboot_module.entity.Group;
 import uz.pdp.springboot_module.exceptions.DataNotFoundException;
 import uz.pdp.springboot_module.exceptions.GroupNameAlreadyExistsException;
 import uz.pdp.springboot_module.payload.BaseResponse;
-import uz.pdp.springboot_module.payload.GetGroupFullInfo;
-import uz.pdp.springboot_module.payload.GroupCreator;
-import uz.pdp.springboot_module.payload.GroupResponse;
+import uz.pdp.springboot_module.payload.group.GetGroupFullInfo;
+import uz.pdp.springboot_module.payload.group.GroupCreator;
+import uz.pdp.springboot_module.payload.group.GroupResponse;
 import uz.pdp.springboot_module.repository.GroupRepository;
 import uz.pdp.springboot_module.service.GroupService;
 

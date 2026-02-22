@@ -1,4 +1,4 @@
-package uz.pdp.springboot_module.payload;
+package uz.pdp.springboot_module.payload.book;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

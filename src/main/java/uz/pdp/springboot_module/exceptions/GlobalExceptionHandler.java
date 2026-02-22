@@ -46,6 +46,20 @@ public class GlobalExceptionHandler {
                 );
     }
 
+    @ExceptionHandler(UsernameAlreadyExistsException.class)
+    public ResponseEntity<BaseResponse<ErrorDto>> handleUsernameAlreadyExistsException(UsernameAlreadyExistsException ex, HttpServletRequest request) {
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(new BaseResponse<>(
+                                ErrorDto.builder()
+                                        .errorCode(400)
+                                        .errorBody(ex.getMessage())
+                                        .errorPath(request.getRequestURI())
+                                        .build()
+                        )
+                );
+    }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<BaseResponse<Object>> handleMethodArgumentNotValidException(MethodArgumentNotValidException ex, HttpServletRequest request) {
         Map<String, List<String>> errorBody = new HashMap<>();

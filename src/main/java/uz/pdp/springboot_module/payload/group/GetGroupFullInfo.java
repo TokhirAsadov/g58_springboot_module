@@ -1,7 +1,8 @@
-package uz.pdp.springboot_module.payload;
+package uz.pdp.springboot_module.payload.group;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.beans.factory.annotation.Value;
+import uz.pdp.springboot_module.payload.student.GetStudentResponse;
 
 import java.util.List;
 

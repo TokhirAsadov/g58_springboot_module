@@ -1,4 +1,4 @@
-package uz.pdp.springboot_module.payload;
+package uz.pdp.springboot_module.payload.student;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
