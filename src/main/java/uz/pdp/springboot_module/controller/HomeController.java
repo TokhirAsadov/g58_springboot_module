@@ -26,7 +26,7 @@ public class HomeController {
     }
 
     @GetMapping("/manager")
-    @PreAuthorize("hasRole('MANAGER')")
+    @PreAuthorize("hasAnyRole('MANAGER','ADMIN')")
     public String manager() {
         return "Welcome MANAGER Page!";
     }

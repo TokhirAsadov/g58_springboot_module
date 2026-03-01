@@ -7,6 +7,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -16,12 +17,15 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.access.AccessDeniedHandler;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import tools.jackson.databind.ObjectMapper;
 import uz.pdp.springboot_module.payload.ErrorDto;
 import uz.pdp.springboot_module.security.CustomAccessDeniedHandler;
 import uz.pdp.springboot_module.security.CustomAuthenticationEntryPoint;
+import uz.pdp.springboot_module.security.jwt.JwtTokenFilter;
+import uz.pdp.springboot_module.security.jwt.JwtTokenUtil;
 
 import java.util.List;
 
@@ -33,11 +37,13 @@ public class SecurityConfig {
     private final ObjectMapper objectMapper;
     private final CustomAuthenticationEntryPoint customAuthenticationEntryPoint;
     private final CustomAccessDeniedHandler customAccessDeniedHandler;
+    private final JwtTokenUtil jwtTokenUtil;
 
-    public SecurityConfig(ObjectMapper objectMapper, CustomAuthenticationEntryPoint customAuthenticationEntryPoint, CustomAccessDeniedHandler customAccessDeniedHandler) {
+    public SecurityConfig(ObjectMapper objectMapper, CustomAuthenticationEntryPoint customAuthenticationEntryPoint, CustomAccessDeniedHandler customAccessDeniedHandler, JwtTokenUtil jwtTokenUtil) {
         this.objectMapper = objectMapper;
         this.customAuthenticationEntryPoint = customAuthenticationEntryPoint;
         this.customAccessDeniedHandler = customAccessDeniedHandler;
+        this.jwtTokenUtil = jwtTokenUtil;
     }
 
     @Bean
@@ -55,69 +61,20 @@ public class SecurityConfig {
                 }))
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorize -> authorize
+                        .requestMatchers("/api/auth/**").permitAll()
                         .anyRequest()
                         .fullyAuthenticated()
                 )
-                .httpBasic(
-                        httpBasicConfigurer -> httpBasicConfigurer.realmName("G58")
-                            .authenticationEntryPoint(customAuthenticationEntryPoint)
-
+                .sessionManagement(sessionManagementConfigurer -> sessionManagementConfigurer
+                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
                 .exceptionHandling(exceptionHandlingConfigurer -> exceptionHandlingConfigurer
-                        //.authenticationEntryPoint(customAuthenticationEntryPoint)
+                        .authenticationEntryPoint(customAuthenticationEntryPoint)
                         .accessDeniedHandler(customAccessDeniedHandler)
                 )
+                .addFilterBefore(new JwtTokenFilter(jwtTokenUtil, userDetailsService()), UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
-
-//    @Bean
-//    public CorsConfigurationSource corsConfigurationSource(){
-//        return request -> {
-//            UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-//            var corsConfiguration = new CorsConfiguration();
-//            corsConfiguration.setAllowedOrigins(List.of("*"
-////                    "http://1.1.1.12:5001",
-////                    "http://localhost:3000"
-//            ));
-//            corsConfiguration.setAllowedMethods(List.of("GET"));
-//            corsConfiguration.setAllowedHeaders(List.of(
-//                    "*"
-////                    "X-G58-Header","Content-Type"
-//            ));
-//
-//            source.registerCorsConfiguration("/**", corsConfiguration);
-//            return source.getCorsConfiguration(request);
-//        };
-//    }
-
-
-//    @Bean
-//    public AccessDeniedHandler accessDeniedHandler() {
-//        return (request, response, accessDeniedException) -> {
-//            accessDeniedException.printStackTrace();
-//            String errorPath = request.getRequestURI();
-//            String errorMessage = "Sizda bu resursga kirish uchun ruxsat yo'q!."; // accessDeniedException.getMessage();
-//            Integer errorCode = 403; // Forbidden
-//            ErrorDto errorDto = new ErrorDto(errorMessage, errorPath, errorCode);
-//            response.setStatus(errorCode);
-//            ServletOutputStream outputStream = response.getOutputStream();
-//            objectMapper.writeValue(outputStream, errorDto);
-//        };
-//    }
-
-//    @Bean
-//    public AuthenticationEntryPoint authenticationEntryPoint() {
-//        return (request, response, authException) -> {
-//            authException.printStackTrace();
-//            String errorPath = request.getRequestURI();
-//            String errorMessage = "Avval login buling!."; // authException.getMessage();
-//            Integer errorCode = 401; // Unauthorized
-//            ErrorDto errorDto = new ErrorDto(errorMessage, errorPath, errorCode);
-//            response.setStatus(errorCode);
-//            ServletOutputStream outputStream = response.getOutputStream();
-//            objectMapper.writeValue(outputStream, errorDto);
-//        };
-//    }
 
     @Bean
     public UserDetailsService userDetailsService(){
