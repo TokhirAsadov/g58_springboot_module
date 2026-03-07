@@ -2,10 +2,7 @@ package uz.pdp.springboot_module.controller;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import uz.pdp.springboot_module.payload.BaseResponse;
 import uz.pdp.springboot_module.payload.ProductCreator;
 import uz.pdp.springboot_module.payload.ProductResponse;
@@ -25,7 +22,7 @@ public class ProductController {
         return new BaseResponse<>(response);
     }
 
-    @PostMapping("/findAll")
+    @GetMapping("/findAll")
     public BaseResponse<List<ProductResponse>> findAll(){
         List<ProductResponse> response = productService.findAll();
         return new BaseResponse<>(response);
