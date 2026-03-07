@@ -1,10 +1,17 @@
 package uz.pdp.springboot_module.controller;
 
+import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import uz.pdp.springboot_module.payload.BaseResponse;
+import uz.pdp.springboot_module.payload.ErrorDto;
 import uz.pdp.springboot_module.payload.ProductCreator;
 import uz.pdp.springboot_module.payload.ProductResponse;
 import uz.pdp.springboot_module.service.ProductService;
@@ -44,10 +51,36 @@ public class ProductController {
         return new BaseResponse<>(response);
     }
 
+    @Operation(
+            summary = "ID bo`yicha productni olish"
+    )
+    @ApiResponses(
+            value = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Product topildi"
+                    ),
+                    @ApiResponse(responseCode = "404", description = "Not Found", content = {
+                            @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
+                                    schema = @Schema(implementation = ErrorDto.class))
+                    }),
+                    @ApiResponse(
+                            responseCode = "500",
+                            description = "Server xatosi"
+                    )
+            }
+    )
     @GetMapping("/findById/{id}")
     public BaseResponse<ProductResponse> findById(@PathVariable Integer id){
         ProductResponse response = productService.findById(id);
         return new BaseResponse<>(response);
+    }
+
+    @Hidden
+    @DeleteMapping("/deleteById/{id}")
+    public BaseResponse<String> deleteById(@PathVariable Integer id){
+        productService.deleteById(id);
+        return new BaseResponse<>("Product deleted successfully");
     }
 
 }

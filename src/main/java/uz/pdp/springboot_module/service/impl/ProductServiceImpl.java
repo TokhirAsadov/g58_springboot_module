@@ -45,4 +45,12 @@ public class ProductServiceImpl implements ProductService {
         );
         return new ProductResponse(product.getId(), product.getName(), product.getPrice());
     }
+
+    @Override
+    public void deleteById(Integer id) {
+        if (!productRepository.existsById(id)) {
+            throw new DataNotFoundException("Product not found");
+        }
+        productRepository.deleteById(id);
+    }
 }

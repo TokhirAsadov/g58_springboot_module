@@ -11,4 +11,6 @@ public interface ProductService {
     List<ProductResponse> findAll();
 
     ProductResponse findById(Integer id);
+
+    void deleteById(Integer id);
 }

@@ -24,6 +24,13 @@ public class ErrorDto {
     public ErrorDto() {
     }
 
+    public ErrorDto(Integer errorCode, String errorPath, Object errorBody) {
+        this.errorCode = errorCode;
+        this.errorPath = errorPath;
+        this.errorBody = errorBody;
+        this.timestamp = LocalDateTime.now();
+    }
+
     public Integer getErrorCode() {
         return errorCode;
     }
