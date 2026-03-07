@@ -53,4 +53,17 @@ public class ProductServiceImpl implements ProductService {
         }
         productRepository.deleteById(id);
     }
+
+    @Override
+    public List<ProductResponse> findProductsBetweenPrices(Integer minPrice, Integer maxPrice) {
+        return productRepository.findByPriceBetween(minPrice, maxPrice).stream()
+                .map(product ->
+                        new ProductResponse(
+                                product.getId(),
+                                product.getName(),
+                                product.getPrice()
+                        )
+                )
+                .toList();
+    }
 }

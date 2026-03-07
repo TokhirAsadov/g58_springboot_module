@@ -13,4 +13,6 @@ public interface ProductService {
     ProductResponse findById(Integer id);
 
     void deleteById(Integer id);
+
+    List<ProductResponse> findProductsBetweenPrices(Integer minPrice, Integer maxPrice);
 }

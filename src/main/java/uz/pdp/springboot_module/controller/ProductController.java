@@ -2,6 +2,7 @@ package uz.pdp.springboot_module.controller;
 
 import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -83,4 +84,41 @@ public class ProductController {
         return new BaseResponse<>("Product deleted successfully");
     }
 
+    @Operation(
+            summary = "ID bo`yicha productni olish"
+    )
+    @ApiResponses(
+            value = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Product topildi"
+                    ),
+                    @ApiResponse(responseCode = "404", description = "Not Found", content = {
+                            @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
+                                    schema = @Schema(implementation = ErrorDto.class))
+                    }),
+                    @ApiResponse(
+                            responseCode = "500",
+                            description = "Server xatosi"
+                    )
+            }
+    )
+    @GetMapping("/findProductsBetweenPrices")
+    public BaseResponse<List<ProductResponse>> findProductsBetweenPrices(
+            @Parameter(
+                    name =  "minPrice",
+                    description  = "Minimal price - biz qidirayotgan productning minimal price`si",
+                    example = "100",
+                    required = true)
+            @RequestParam(name = "minPrice") Integer minPrice,
+            @Parameter(
+                    name =  "maxPrice",
+                    description  = "Maximum price - biz qidirayotgan productning maximum price`si",
+                    example = "100000",
+                    required = true)
+            @RequestParam(name = "maxPrice") Integer maxPrice
+    ){
+        List<ProductResponse> response = productService.findProductsBetweenPrices(minPrice, maxPrice);
+        return new BaseResponse<>(response);
+    }
 }
