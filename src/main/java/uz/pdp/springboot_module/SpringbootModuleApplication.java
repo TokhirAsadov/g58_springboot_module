@@ -1,11 +1,11 @@
 package uz.pdp.springboot_module;
 
-import io.swagger.v3.oas.annotations.ExternalDocumentation;
-import io.swagger.v3.oas.annotations.OpenAPIDefinition;
-import io.swagger.v3.oas.annotations.info.Contact;
-import io.swagger.v3.oas.annotations.info.Info;
-import io.swagger.v3.oas.annotations.info.License;
-import io.swagger.v3.oas.annotations.servers.Server;
+import io.swagger.v3.oas.models.ExternalDocumentation;
+import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.info.Contact;
+import io.swagger.v3.oas.models.info.Info;
+import io.swagger.v3.oas.models.info.License;
+import io.swagger.v3.oas.models.servers.Server;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -17,40 +17,40 @@ import uz.pdp.springboot_module.repository.ProductRepository;
 
 import java.util.List;
 
-@OpenAPIDefinition(
-		info = @Info(
-				title = "Product API - G58 | OpenAPI Specification | Swagger",
-				version = "v1.0",
-				description = "API for managing products",
-				contact = @Contact(
-						name = "Tokhir Asadov",
-						email = "guvalakat1603@gmail.com",
-						url = "https://github.com/TokhirAsadov"
-				),
-				license = @License(
-						name = "Apache 2.0",
-						url = "https://springdoc.org"),
-				termsOfService = "http://swagger.io/terms/"
-		),
-		externalDocs = @ExternalDocumentation(
-				description = "Spring 6 Wiki Documentation", url = "https://springshop.wiki.github.org/docs"
-		),
-		servers = {
-				@Server(
-						url = "http://localhost:8080",
-						description = "Dev server"
-				),
-				@Server(
-						url = "http://localhost:9090",
-						description = "Test server"
-				),
-				@Server(
-						url = "http://localhost:7070",
-						description = "Prod server"
-				)
-
-		}
-)
+//@OpenAPIDefinition(
+//		info = @Info(
+//				title = "Product API - G58 | OpenAPI Specification | Swagger",
+//				version = "v1.0",
+//				description = "API for managing products",
+//				contact = @Contact(
+//						name = "Tokhir Asadov",
+//						email = "guvalakat1603@gmail.com",
+//						url = "https://github.com/TokhirAsadov"
+//				),
+//				license = @License(
+//						name = "Apache 2.0",
+//						url = "https://springdoc.org"),
+//				termsOfService = "http://swagger.io/terms/"
+//		),
+//		externalDocs = @ExternalDocumentation(
+//				description = "Spring 6 Wiki Documentation", url = "https://springshop.wiki.github.org/docs"
+//		),
+//		servers = {
+//				@Server(
+//						url = "http://localhost:8080",
+//						description = "Dev server"
+//				),
+//				@Server(
+//						url = "http://localhost:9090",
+//						description = "Test server"
+//				),
+//				@Server(
+//						url = "http://localhost:7070",
+//						description = "Prod server"
+//				)
+//
+//		}
+//)
 @SpringBootApplication
 public class SpringbootModuleApplication {
 
@@ -62,6 +62,37 @@ public class SpringbootModuleApplication {
 
     public static void main(String[] args) {
 		SpringApplication.run(SpringbootModuleApplication.class, args);
+	}
+
+	@Bean
+	public OpenAPI springOpenAPI() {
+		return new OpenAPI()
+				.info(new Info()
+						.title("Spring 6 Swagger 2 Annotation Example")
+						.description("Spring 6 Swagger Simple Application")
+						.version("v1.0")
+						.contact(new Contact()
+								.name("Tokhir Asadov")
+								.email("guvalakat1603@gmail.com")
+								.url("https://github.com/TokhirAsadov"))
+						.license(new License()
+								.name("Apache 2.0")
+								.url("http://springdoc.org"))
+						.termsOfService("http://swagger.io/terms/"))
+				.externalDocs(new ExternalDocumentation()
+						.description("SpringShop Wiki Documentation")
+						.url("https://springshop.wiki.github.org/docs"))
+				.servers(List.of(
+						new Server()
+								.url("http://localhost:8080")
+								.description("DEV server"),
+						new Server()
+								.url("http://localhost:9090")
+								.description("TEST server"),
+						new Server()
+								.url("http://localhost:7070")
+								.description("PROD server")
+				));
 	}
 
 	@Bean
