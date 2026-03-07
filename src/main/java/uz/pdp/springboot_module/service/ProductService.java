@@ -9,4 +9,6 @@ public interface ProductService {
     ProductResponse create(ProductCreator creator);
 
     List<ProductResponse> findAll();
+
+    ProductResponse findById(Integer id);
 }

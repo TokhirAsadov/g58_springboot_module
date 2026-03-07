@@ -2,6 +2,7 @@ package uz.pdp.springboot_module.service.impl;
 
 import org.springframework.stereotype.Service;
 import uz.pdp.springboot_module.entity.Product;
+import uz.pdp.springboot_module.exceptions.DataNotFoundException;
 import uz.pdp.springboot_module.payload.ProductCreator;
 import uz.pdp.springboot_module.payload.ProductResponse;
 import uz.pdp.springboot_module.repository.ProductRepository;
@@ -35,5 +36,13 @@ public class ProductServiceImpl implements ProductService {
                         )
                 )
                 .toList();
+    }
+
+    @Override
+    public ProductResponse findById(Integer id) {
+        Product product = productRepository.findById(id).orElseThrow(
+                () -> new DataNotFoundException("Product not found")
+        );
+        return new ProductResponse(product.getId(), product.getName(), product.getPrice());
     }
 }
