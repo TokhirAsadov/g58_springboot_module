@@ -14,9 +14,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @OpenAPIDefinition(
         info = @Info(
-                title = "MapStruct - G58 | OpenAPI Specification | Swagger",
+                title = "Working with .properties files - G58 | OpenAPI Specification | Swagger",
                 version = "v1.0",
-                description = "API for using mapstruct in spring boot application",
+                description = "lesson-7.2",
                 contact = @Contact(
                         name = "Tokhir Asadov",
                         email = "guvalakat1603@gmail.com",
