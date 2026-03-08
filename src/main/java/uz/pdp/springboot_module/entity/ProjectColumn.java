@@ -1,24 +1,21 @@
 package uz.pdp.springboot_module.entity;
 
-import java.nio.file.Path;
 import java.time.LocalDateTime;
-import java.util.List;
 
-public class Project {
+public class ProjectColumn {
     private String id;
     private String name;
-    private Path path;
-    private List<ProjectColumn> columns;
+    private String description;
     private LocalDateTime createdAt = LocalDateTime.now();
 
-    public Project() {
+    public ProjectColumn() {
     }
 
-    public Project(String id, String name, Path path, List<ProjectColumn> columns) {
+    public ProjectColumn(String id, String name, String description) {
         this.id = id;
         this.name = name;
-        this.path = path;
-        this.columns = columns;
+        this.description = description;
+        this.createdAt = LocalDateTime.now();
     }
 
     public String getId() {
@@ -37,12 +34,12 @@ public class Project {
         this.name = name;
     }
 
-    public Path getPath() {
-        return path;
+    public String getDescription() {
+        return description;
     }
 
-    public void setPath(Path path) {
-        this.path = path;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public LocalDateTime getCreatedAt() {
@@ -51,13 +48,5 @@ public class Project {
 
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
-    }
-
-    public List<ProjectColumn> getColumns() {
-        return columns;
-    }
-
-    public void setColumns(List<ProjectColumn> columns) {
-        this.columns = columns;
     }
 }
