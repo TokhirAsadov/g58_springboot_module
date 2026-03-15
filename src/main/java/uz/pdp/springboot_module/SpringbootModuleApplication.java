@@ -18,7 +18,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
         info = @Info(
                 title = "Working with .properties files - G58 | OpenAPI Specification | Swagger",
                 version = "v1.0",
-                description = "lesson-7.2",
+                description = "lesson-7.2.working_with_properties - branch",
                 contact = @Contact(
                         name = "Tokhir Asadov",
                         email = "guvalakat1603@gmail.com",
