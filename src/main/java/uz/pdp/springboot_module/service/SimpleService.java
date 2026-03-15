@@ -1,9 +1,10 @@
 package uz.pdp.springboot_module.service;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
@@ -11,18 +12,32 @@ import java.util.concurrent.TimeUnit;
 @Component
 public class SimpleService {
 
-    @Async
-    public void sendMessage() {
-        log.info("sendMessage is starting. Time: {}", new Date());
+//    @Scheduled(fixedDelay = 3000)
+//    public void fixedDelay() {
+//        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//        log.info("Time: {}", dateFormat.format(new Date()));
+//        try {
+//            TimeUnit.SECONDS.sleep(2);
+//        } catch (InterruptedException e) {
+//            throw new RuntimeException(e);
+//        }
+//    }
 
-        try {
-            TimeUnit.SECONDS.sleep(5);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+//    @Scheduled(fixedRate = 3, timeUnit = TimeUnit.SECONDS)
+//    public void fixedRate() {
+//        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//        log.info("Time: {}", dateFormat.format(new Date()));
+//
+//        try {
+//            TimeUnit.SECONDS.sleep(2);
+//        } catch (InterruptedException e) {
+//            throw new RuntimeException(e);
+//        }
+//    }
 
-        log.info("sendMessage is sent. Time: {}", new Date());
-        throw new RuntimeException("Xatolik sodir buldi............");
+    @Scheduled(cron = "* */10 */4 LW * *")
+    public void fixedRate() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        log.info("Time: {}", dateFormat.format(new Date()));
     }
-
 }

@@ -10,9 +10,14 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 import org.springframework.context.annotation.Bean;
-import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
 
 @OpenAPIDefinition(
         info = @Info(
@@ -41,11 +46,23 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 )
 @SpringBootApplication
 @ConfigurationPropertiesScan
-@EnableAsync
+@EnableScheduling
 public class SpringbootModuleApplication {
 
 
     public static void main(String[] args) {
+
+        class ClockTask extends TimerTask {
+
+            private final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            @Override
+            public void run() {
+                System.out.print("\r"+"Time is : "+dateFormat.format(new Date()));
+            }
+        }
+        Timer timer = new Timer();
+//        timer.scheduleAtFixedRate(new ClockTask(), 3000, 10000);
+
         SpringApplication.run(SpringbootModuleApplication.class, args);
     }
 
