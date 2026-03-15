@@ -16,7 +16,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @OpenAPIDefinition(
         info = @Info(
-                title = "Working with .properties files - G58 | OpenAPI Specification | Swagger",
+                title = "Working with .yaml files - G58 | OpenAPI Specification | Swagger",
                 version = "v1.0",
                 description = "lesson-7.3.working_with_YAML - branch",
                 contact = @Contact(
