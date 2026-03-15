@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import uz.pdp.springboot_module.property.PeopleProperties;
 import uz.pdp.springboot_module.property.PersonProperties;
 
 import java.util.List;
@@ -26,9 +27,11 @@ public class ReadValueFromPropertiesController {
     private Map<String,String> exampleNumbers;
 
     private final PersonProperties personProperties;
+    private final PeopleProperties peopleProperties;
 
-    public ReadValueFromPropertiesController(PersonProperties personProperties) {
+    public ReadValueFromPropertiesController(PersonProperties personProperties, PeopleProperties peopleProperties) {
         this.personProperties = personProperties;
+        this.peopleProperties = peopleProperties;
     }
 
     @GetMapping("/exampleString")
@@ -51,5 +54,10 @@ public class ReadValueFromPropertiesController {
     @GetMapping("/personProperties")
     public PersonProperties personProperties(){
         return personProperties;
+    }
+
+    @GetMapping("/peopleProperties")
+    public PeopleProperties peopleProperties(){
+        return peopleProperties;
     }
 }
