@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import uz.pdp.springboot_module.property.ExampleProperties;
 import uz.pdp.springboot_module.property.PeopleProperties;
 import uz.pdp.springboot_module.property.PersonProperties;
 
@@ -14,41 +15,34 @@ import java.util.Map;
 @RequestMapping("/api/properties")
 public class ReadValueFromPropertiesController {
 
-    @Value("${example.string:Default string..}")
-    private String exampleString;
-
-    @Value("${example.languages}")
-    private List<String> exampleLanguages;
-
-    @Value("#{'${example.languages2}'.split('# ')}")
-    private List<String> exampleLanguages2;
-
-    @Value("#{${example.numbers}}")
-    private Map<String,String> exampleNumbers;
-
+    private final ExampleProperties exampleProperties;
     private final PersonProperties personProperties;
     private final PeopleProperties peopleProperties;
 
-    public ReadValueFromPropertiesController(PersonProperties personProperties, PeopleProperties peopleProperties) {
+    public ReadValueFromPropertiesController(ExampleProperties exampleProperties, PersonProperties personProperties, PeopleProperties peopleProperties) {
+        this.exampleProperties = exampleProperties;
         this.personProperties = personProperties;
         this.peopleProperties = peopleProperties;
     }
 
     @GetMapping("/exampleString")
     public String getExampleString(){
-        return exampleString;
+        return exampleProperties.string();
     }
+
     @GetMapping("/exampleLanguages")
     public List<String> exampleLanguages(){
-        return exampleLanguages;
+        return exampleProperties.languages();
     }
+
     @GetMapping("/exampleLanguages2")
     public List<String> exampleLanguages2(){
-        return exampleLanguages2;
+        return exampleProperties.languages2();
     }
+
     @GetMapping("/exampleNumbers")
     public Map<String,String> exampleNumbers(){
-        return exampleNumbers;
+        return exampleProperties.numbers();
     }
 
     @GetMapping("/personProperties")

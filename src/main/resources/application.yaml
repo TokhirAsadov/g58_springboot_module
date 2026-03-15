@@ -1,0 +1,62 @@
+spring:
+  application:
+    name: springboot_module
+
+  datasource:
+    url: jdbc:h2:mem:testdb
+    username: sa
+    password: 123
+    driver-class-name: org.h2.Driver
+
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+  h2:
+    console:
+      enabled: true
+      path: /g58-h2
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+
+example:
+  string: | 
+    Salom .properties file fasdfsff dsadfsdfsdf
+    asdfsdfasdfasdf dsfsaf
+    dfsadf dsfasdfd sdfsfsdfasdfd fasdfs
+
+  languages:
+    - Java
+    - Python
+    - Kotlin
+    - Go
+    - C++
+
+  languages2: ['Java', 'Python', 'Go']
+
+  numbers: {'one':'bir', 'two':'ikki', 'three':'uch'}
+
+person:
+  id: 1
+  firstName: Ali
+  lastName: Aliyev
+  fullName:  ${person.firstName} ${person.lastName}
+  age: 29
+
+people:
+  person:
+    - id: 1
+      firstName: Ali
+      lastName: Aliyev
+      fullName: ${people.person[0].firstName} ${people.person[0].lastName}
+      age: 29
+
+    - id: 2
+      firstName: Vali
+      lastName: Valiyev
+      fullName: ${people.person[0].firstName} ${people.person[0].lastName}
+      age: 30

@@ -1,6 +1,5 @@
 package uz.pdp.springboot_module.property;
 
-import org.hibernate.annotations.ColumnDefault;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.bind.DefaultValue;
 
