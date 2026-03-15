@@ -9,16 +9,16 @@ import io.swagger.v3.oas.annotations.servers.Server;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @OpenAPIDefinition(
         info = @Info(
-                title = "Working with .properties files - G58 | OpenAPI Specification | Swagger",
+                title = "Asynchronous execution in Springboot - G58 | OpenAPI Specification | Swagger",
                 version = "v1.0",
-                description = "lesson-7.2",
+                description = "lesson-7.4.asynchronous_execution - branch",
                 contact = @Contact(
                         name = "Tokhir Asadov",
                         email = "guvalakat1603@gmail.com",
@@ -41,6 +41,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 )
 @SpringBootApplication
 @ConfigurationPropertiesScan
+@EnableAsync
 public class SpringbootModuleApplication {
 
 
