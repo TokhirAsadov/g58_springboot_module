@@ -10,7 +10,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 import org.springframework.context.annotation.Bean;
+import org.springframework.core.task.TaskExecutor;
 import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -48,19 +50,6 @@ public class SpringbootModuleApplication {
     public static void main(String[] args) {
         SpringApplication.run(SpringbootModuleApplication.class, args);
     }
-
-//	@Bean
-//	public CommandLineRunner run(){
-//		return args -> {
-//			productRepository.saveAll(
-//					List.of(
-//							new Product("Product 1", 100),
-//							new Product( "Product 2", 200),
-//							new Product("Product 3", 300)
-//					)
-//			);
-//		};
-//	}
 
     @Bean
     public WebMvcConfigurer corsConfigurer() {

@@ -1,30 +1,28 @@
 package uz.pdp.springboot_module.service;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
+@Slf4j
 @Component
 public class SimpleService {
 
-    //public static final ExecutorService executorService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
-
     @Async
     public void sendMessage() {
-        System.out.printf("sendMessage is starting. Time: %s%n", new Date());
+        log.info("sendMessage is starting. Time: {}", new Date());
 
         try {
             TimeUnit.SECONDS.sleep(5);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        System.out.printf("sendMessage is sent. Time: %s%n", new Date());
 
-        //executorService.execute(runnable);
+        log.info("sendMessage is sent. Time: {}", new Date());
+        throw new RuntimeException("Xatolik sodir buldi............");
     }
 
 }
