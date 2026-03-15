@@ -10,17 +10,15 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 import org.springframework.context.annotation.Bean;
-import org.springframework.core.task.TaskExecutor;
 import org.springframework.scheduling.annotation.EnableAsync;
-import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @OpenAPIDefinition(
         info = @Info(
-                title = "Asynchronous execution in Springboot - G58 | OpenAPI Specification | Swagger",
+                title = "Task Scheduling (@Schedule, cron - jobs) - G58 | OpenAPI Specification | Swagger",
                 version = "v1.0",
-                description = "lesson-7.4.asynchronous_execution - branch",
+                description = "lesson-8.1.TaskScheduling - branch",
                 contact = @Contact(
                         name = "Tokhir Asadov",
                         email = "guvalakat1603@gmail.com",
