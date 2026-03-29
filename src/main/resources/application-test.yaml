@@ -1,6 +1,10 @@
 server:
   port: 8090
+
 spring:
+  application:
+    name: springboot_module
+
   datasource:
     url: jdbc:h2:mem:testdb
     username: sa
@@ -18,3 +22,6 @@ spring:
       enabled: true
       path: /g58-h2
 
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
