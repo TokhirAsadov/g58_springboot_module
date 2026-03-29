@@ -35,7 +35,7 @@ public class SimpleService {
 //        }
 //    }
 
-    @Scheduled(cron = "* */10 */4 LW * *")
+    @Scheduled(cron = "* * * * * *")
     public void fixedRate() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         log.info("Time: {}", dateFormat.format(new Date()));
