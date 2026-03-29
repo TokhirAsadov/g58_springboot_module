@@ -35,7 +35,11 @@ public class MailSenderController {
         return "Send Message Successfully!🎉🎉🎉";
     }
 
-
+    @GetMapping("/send-html-page-v2-with-free-maker/{username}")
+    public String sendHtmlPageWithFreeMaker(@PathVariable String username) {
+        mailSernderService.sendHtmlPageWithFreeMaker(username);
+        return "Send Message Successfully!🎉🎉🎉";
+    }
 
     @GetMapping("/send-attachment/{username}")
     public String sendAttachment(@PathVariable String username) {

@@ -1,6 +1,8 @@
 package uz.pdp.springboot_module.service;
 
-import jakarta.mail.Address;
+import freemarker.template.Configuration;
+import freemarker.template.Template;
+import freemarker.template.TemplateException;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;
@@ -9,17 +11,20 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Base64;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
 public class MailSernderService {
 
     private final JavaMailSender javaMailSender;
+    private final Configuration configuration;
 
     @Async
     public void sendText(String username) {
@@ -157,6 +162,32 @@ public class MailSernderService {
         } catch (MessagingException e) {
             e.printStackTrace();
         } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Async
+    public void sendHtmlPageWithFreeMaker(String username) {
+        MimeMessage mimeMessage = javaMailSender.createMimeMessage();
+        try {
+            MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
+            helper.setSubject("Hello, " + username + "!");
+            helper.setTo(username + "@gmail.com");
+            helper.setFrom("from@gmail.com");
+
+            Template template= configuration.getTemplate("activate_account.ftlh");
+            Base64.Encoder encoder = Base64.getEncoder();
+            String token = encoder.encodeToString(username.getBytes());
+            Map<String, String> data = Map.of("username", username, "token", token);
+            String htmlContent = FreeMarkerTemplateUtils.processTemplateIntoString(template, data);
+
+            helper.setText(htmlContent, true);
+            javaMailSender.send(mimeMessage);
+
+            System.out.println("Email sent successfully to " + username + "@gmail.com ✅✅✅");
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        } catch (IOException | TemplateException e) {
             throw new RuntimeException(e);
         }
     }
