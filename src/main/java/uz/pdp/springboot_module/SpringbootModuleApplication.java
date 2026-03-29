@@ -19,9 +19,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @OpenAPIDefinition(
         info = @Info(
-                title = "Spring Profiling - G58 | OpenAPI Specification | Swagger",
+                title = "Mailing and FreeMaker - G58 | OpenAPI Specification | Swagger",
                 version = "v1.0",
-                description = "lesson-8.2.Spring_profiling - branch",
+                description = "lesson-8.3.Mailing_and_FreeMaker - branch",
                 contact = @Contact(
                         name = "Tokhir Asadov",
                         email = "guvalakat1603@gmail.com",
@@ -60,32 +60,6 @@ public class SpringbootModuleApplication {
                 registry.addMapping("/**").allowedOrigins("*");
             }
         };
-    }
-
-    @Bean
-    @Profile("dev")
-    public TaskExecutor taskExecutorDev() {
-        ThreadPoolTaskExecutor taskExecutor = new ThreadPoolTaskExecutor();
-        taskExecutor.setCorePoolSize(10);
-        taskExecutor.setMaxPoolSize(100);
-        taskExecutor.setKeepAliveSeconds(30);
-        taskExecutor.setQueueCapacity(100);
-        taskExecutor.setThreadNamePrefix("dev-");
-        taskExecutor.initialize();
-        return taskExecutor;
-    }
-
-    @Bean
-    @Profile("test")
-    public TaskExecutor taskExecutorTest() {
-        ThreadPoolTaskExecutor taskExecutor = new ThreadPoolTaskExecutor();
-        taskExecutor.setCorePoolSize(5);
-        taskExecutor.setMaxPoolSize(10);
-        taskExecutor.setKeepAliveSeconds(10);
-        taskExecutor.setQueueCapacity(20);
-        taskExecutor.setThreadNamePrefix("test-");
-        taskExecutor.initialize();
-        return taskExecutor;
     }
 
     @Bean
