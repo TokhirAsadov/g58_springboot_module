@@ -2,3 +2,15 @@ spring:
   application:
     name: mailing
 
+  mail:
+    host: sandbox.smtp.mailtrap.io
+    port: 587
+    username: 2660bfad220929
+    password: 7532e8d5501221
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+

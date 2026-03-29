@@ -1,0 +1,165 @@
+package uz.pdp.springboot_module.service;
+
+import jakarta.mail.Address;
+import jakarta.mail.MessagingException;
+import jakarta.mail.internet.MimeMessage;
+import lombok.RequiredArgsConstructor;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.stereotype.Service;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.Base64;
+
+@Service
+@RequiredArgsConstructor
+public class MailSernderService {
+
+    private final JavaMailSender javaMailSender;
+
+    @Async
+    public void sendText(String username) {
+        MimeMessage mimeMessage = javaMailSender.createMimeMessage();
+        try {
+            mimeMessage.setSubject("Hello, " + username + "!");
+            mimeMessage.setText("G58 - Spring Boot Module - Lesson 8.3 - Mailing and FreeMaker");
+
+            mimeMessage.setRecipients(MimeMessage.RecipientType.TO, username + "@gmail.com");
+            mimeMessage.setFrom("from@gmail.com");
+
+            javaMailSender.send(mimeMessage);
+            System.out.println("Email sent successfully to " + username + "@gmail.com ✅✅✅");
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Async
+    public void sendHtmlContent(String username) {
+        MimeMessage mimeMessage = javaMailSender.createMimeMessage();
+        try {
+            mimeMessage.setSubject("Hello, " + username + "!");
+            mimeMessage.setContent("<h1>Assalamu alaykum, <span style=\"color:green;\">" + username + "</span></h1>", "text/html");
+
+            mimeMessage.setRecipients(MimeMessage.RecipientType.TO, username + "@gmail.com");
+            mimeMessage.setFrom("from@gmail.com");
+
+            javaMailSender.send(mimeMessage);
+            System.out.println("Email sent successfully to " + username + "@gmail.com ✅✅✅");
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Async
+    public void sendHtmlPageV1(String username) {
+        MimeMessage mimeMessage = javaMailSender.createMimeMessage();
+        try {
+            mimeMessage.setSubject("Hello, " + username + "!");
+
+            Path htmlFilePath = Path.of("src/main/resources/welcome.html");
+            String htmlFileFormatted = Files.readString(htmlFilePath).formatted(username);
+            mimeMessage.setContent(htmlFileFormatted, "text/html");
+
+            mimeMessage.setRecipients(MimeMessage.RecipientType.TO, username + "@gmail.com");
+            mimeMessage.setFrom("from@gmail.com");
+
+            javaMailSender.send(mimeMessage);
+            System.out.println("Email sent successfully to " + username + "@gmail.com ✅✅✅");
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Async
+    public void sendAttachment(String username) {
+        try {
+            MimeMessage mimeMessage = javaMailSender.createMimeMessage();
+            MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
+            helper.setSubject("Hello, " + username + "!");
+
+            Path htmlFilePath = Path.of("src/main/resources/welcome.html");
+            String htmlFileFormatted = Files.readString(htmlFilePath).formatted(username);
+            helper.setText(htmlFileFormatted, true);
+
+            helper.setTo(username + "@gmail.com");
+            helper.setFrom("from@gmail.com");
+
+            Path imagePath = Path.of("src/main/resources/java.png");
+            Path pdfPath = Path.of("src/main/resources/Logging.pdf");
+            FileSystemResource imageSystemResource = new FileSystemResource(imagePath);
+            FileSystemResource pdfSystemResource = new FileSystemResource(pdfPath);
+
+            helper.addAttachment("java.png",imageSystemResource);
+            helper.addAttachment("9.9 Logging.pdf",pdfSystemResource);
+
+            javaMailSender.send(mimeMessage);
+            System.out.println("Email sent successfully to " + username + "@gmail.com ✅✅✅");
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Async
+    public void sendHtmlPageWithImageV1(String username) {
+        MimeMessage mimeMessage = javaMailSender.createMimeMessage();
+        try {
+            mimeMessage.setSubject("Hello, " + username + "!");
+
+            Path html = Path.of("src/main/resources/image.html");
+            Path imageUrl = Path.of("src/main/resources/java.png");
+            Base64.Encoder encoder = Base64.getEncoder();
+            String imageBase64 = encoder.encodeToString(Files.readAllBytes(imageUrl));
+
+            String htmlFileFormatted = Files.readString(html).formatted(imageBase64);
+            mimeMessage.setContent(htmlFileFormatted, "text/html");
+
+            mimeMessage.setRecipients(MimeMessage.RecipientType.TO, username + "@gmail.com");
+            mimeMessage.setFrom("from@gmail.com");
+
+            javaMailSender.send(mimeMessage);
+            System.out.println("Email sent successfully to " + username + "@gmail.com ✅✅✅");
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Async
+    public void sendHtmlPageWithImageV2(String username) {
+        MimeMessage mimeMessage = javaMailSender.createMimeMessage();
+        try {
+            MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
+            helper.setSubject("Hello, " + username + "!");
+
+            helper.setTo(username + "@gmail.com");
+            helper.setFrom("from@gmail.com");
+
+            Path html = Path.of("src/main/resources/image2.html");
+            Path imageUrl = Path.of("src/main/resources/java.png");
+
+            String htmlContent = Files.readString(html);
+
+            helper.setText(htmlContent, true);
+            helper.addInline("image_id", new FileSystemResource(imageUrl));
+
+            javaMailSender.send(mimeMessage);
+            System.out.println("Email sent successfully to " + username + "@gmail.com ✅✅✅");
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+}
