@@ -14,16 +14,11 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Timer;
-import java.util.TimerTask;
-
 @OpenAPIDefinition(
         info = @Info(
-                title = "Task Scheduling (@Schedule, cron - jobs) - G58 | OpenAPI Specification | Swagger",
+                title = "Spring Profiling - G58 | OpenAPI Specification | Swagger",
                 version = "v1.0",
-                description = "lesson-8.1.TaskScheduling - branch",
+                description = "lesson-8.2.Spring_profiling - branch",
                 contact = @Contact(
                         name = "Tokhir Asadov",
                         email = "guvalakat1603@gmail.com",
@@ -51,18 +46,6 @@ public class SpringbootModuleApplication {
 
 
     public static void main(String[] args) {
-
-        class ClockTask extends TimerTask {
-
-            private final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            @Override
-            public void run() {
-                System.out.print("\r"+"Time is : "+dateFormat.format(new Date()));
-            }
-        }
-        Timer timer = new Timer();
-//        timer.scheduleAtFixedRate(new ClockTask(), 3000, 10000);
-
         SpringApplication.run(SpringbootModuleApplication.class, args);
     }
 
