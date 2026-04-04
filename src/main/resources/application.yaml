@@ -17,3 +17,6 @@ spring:
   freemarker:
     template-loader-path: 'classpath:/templetes'
 
+#logging:
+#  level:
+#    root: info

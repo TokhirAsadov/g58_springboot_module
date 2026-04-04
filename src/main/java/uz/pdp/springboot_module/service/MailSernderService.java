@@ -6,6 +6,9 @@ import freemarker.template.TemplateException;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -18,16 +21,30 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Base64;
 import java.util.Map;
+import java.util.Random;
+import java.util.UUID;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class MailSernderService {
+
+//    private static final Logger log = LoggerFactory.getLogger(MailSernderService.class);
 
     private final JavaMailSender javaMailSender;
     private final Configuration configuration;
 
     @Async
     public void sendText(String username) {
+
+        for (int i = 0; i < 2000; i++) {
+            if (new Random().nextBoolean()){
+                log.warn("sendText ::::: {}@gmail.com | id: {}", username, i);
+            } else {
+                log.error("sendText ::::: error | id: {}", i);
+            }
+        }
+
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
         try {
             mimeMessage.setSubject("Hello, " + username + "!");
