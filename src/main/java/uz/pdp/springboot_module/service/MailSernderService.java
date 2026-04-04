@@ -37,13 +37,13 @@ public class MailSernderService {
     @Async
     public void sendText(String username) {
 
-        for (int i = 0; i < 2000; i++) {
-            if (new Random().nextBoolean()){
-                log.warn("sendText ::::: {}@gmail.com | id: {}", username, i);
-            } else {
-                log.error("sendText ::::: error | id: {}", i);
-            }
-        }
+//        for (int i = 0; i < 2000; i++) {
+//            if (new Random().nextBoolean()){
+//                log.warn("sendText ::::: {}@gmail.com | id: {}", username, i);
+//            } else {
+//                log.error("sendText ::::: error | id: {}", i);
+//            }
+//        }
 
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
         try {
