@@ -1,5 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
+
+    <!-- MDC key -->
+    <property name="LOG_PATH_KEY" value="logPath"/>
+
+    <appender name="SIFT" class="ch.qos.logback.classic.sift.SiftingAppender">
+        <discriminator>
+            <key>${LOG_PATH_KEY}</key>
+            <defaultValue>logs/default.log</defaultValue>
+        </discriminator>
+
+        <sift>
+            <appender name="FILE-${logPath}" class="ch.qos.logback.core.rolling.RollingFileAppender">
+                <file>${logPath}</file>
+
+                <encoder>
+                    <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %msg%n</pattern>
+                </encoder>
+
+                <!-- rotation -->
+                <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                    <fileNamePattern>${logPath}.%d{yyyy-MM-dd}.gz</fileNamePattern>
+                    <maxHistory>7</maxHistory>
+                </rollingPolicy>
+            </appender>
+        </sift>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="SIFT"/>
+    </root>
+
+</configuration>
+<!--
+<configuration>
     <property name="LOGS" value="./application_logs"/>
 
     <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
@@ -35,4 +69,4 @@
         <appender-ref ref="Console"/>
     </logger>
 
-</configuration>
+</configuration>-->

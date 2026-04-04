@@ -34,8 +34,12 @@ public class MailSernderService {
     private final JavaMailSender javaMailSender;
     private final Configuration configuration;
 
+    private final LogService logService;
+
     @Async
     public void sendText(String username) {
+
+        logService.logInfo("logs/sms/sendText", "sendText ::::: %s@gmail.com | id: %s".formatted(username, UUID.randomUUID()));
 
 //        for (int i = 0; i < 2000; i++) {
 //            if (new Random().nextBoolean()){
@@ -62,6 +66,7 @@ public class MailSernderService {
 
     @Async
     public void sendHtmlContent(String username) {
+        logService.logInfo("logs/sms/sendHtmlContent", "sendText ::::: %s@gmail.com | id: %s".formatted(username, UUID.randomUUID()));
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
         try {
             mimeMessage.setSubject("Hello, " + username + "!");
@@ -118,8 +123,8 @@ public class MailSernderService {
             FileSystemResource imageSystemResource = new FileSystemResource(imagePath);
             FileSystemResource pdfSystemResource = new FileSystemResource(pdfPath);
 
-            helper.addAttachment("java.png",imageSystemResource);
-            helper.addAttachment("9.9 Logging.pdf",pdfSystemResource);
+            helper.addAttachment("java.png", imageSystemResource);
+            helper.addAttachment("9.9 Logging.pdf", pdfSystemResource);
 
             javaMailSender.send(mimeMessage);
             System.out.println("Email sent successfully to " + username + "@gmail.com ✅✅✅");
@@ -192,7 +197,7 @@ public class MailSernderService {
             helper.setTo(username + "@gmail.com");
             helper.setFrom("from@gmail.com");
 
-            Template template= configuration.getTemplate("activate_account.ftlh");
+            Template template = configuration.getTemplate("activate_account.ftlh");
             Base64.Encoder encoder = Base64.getEncoder();
             String token = encoder.encodeToString(username.getBytes());
             Map<String, String> data = Map.of("username", username, "token", token);
