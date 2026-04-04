@@ -21,9 +21,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @OpenAPIDefinition(
         info = @Info(
-                title = "Mailing and FreeMaker - G58 | OpenAPI Specification | Swagger",
+                title = "Logging - G58 | OpenAPI Specification | Swagger",
                 version = "v1.0",
-                description = "lesson-8.3.Mailing_and_FreeMaker - branch",
+                description = "lesson-8.4.Logging - branch",
                 contact = @Contact(
                         name = "Tokhir Asadov",
                         email = "guvalakat1603@gmail.com",
@@ -76,14 +76,5 @@ public class SpringbootModuleApplication {
         taskExecutor.initialize();
         return taskExecutor;
     }
-
-   /* @Bean
-    public JavaMailSender javaMailSender() {
-        JavaMailSenderImpl javaMailSender = new JavaMailSenderImpl();
-        javaMailSender.setHost("smtp.gmail.com");
-        javaMailSender.setPort(587);
-
-        return javaMailSender;
-    }*/
 
 }
